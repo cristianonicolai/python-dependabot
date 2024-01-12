@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: /.config/
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-type: "direct"
+        update-type: "semver:minor"
+      - dependency-type: "direct"
+        update-type: "semver:major"

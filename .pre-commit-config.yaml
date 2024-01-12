@@ -86,39 +86,87 @@ repos:
           - ansible-core
           - packaging
   - repo: https://github.com/jazzband/pip-tools
-    rev: 7.3.0
+    rev: main
     hooks:
+      # - id: pip-compile
+      #   name: lock
+      #   alias: lock
+      #   always_run: true
+      #   entry: pip-compile --upgrade --resolver=backtracking -q --no-annotate --output-file=.config/lock-requirements.txt pyproject.toml --strip-extras --unsafe-package ruamel-yaml-clib
+      #   files: ^.config\/.*requirements.*$
+      #   language: python
+      #   language_version: "3.10" # minimal we support officially
+      #   pass_filenames: false
+      #   stages: [manual]
+      #   additional_dependencies:
+      #     - pip>=22.3.1
+      # - id: pip-compile
+      #   name: deps
+      #   alias: deps
+      #   always_run: true
+      #   entry: pip-compile --resolver=backtracking -q --no-annotate --output-file=.config/requirements.txt pyproject.toml --extra docs --extra test --strip-extras --unsafe-package ruamel-yaml-clib
+      #   files: ^.config\/.*(requirements|constraints).*$
+      #   language: python
+      #   language_version: "3.10" # minimal we support officially
+      #   pass_filenames: false
+      #   additional_dependencies:
+      #     - pip>=22.3.1
+      # - id: pip-compile
+      #   entry: pip-compile --resolver=backtracking -q --no-annotate --output-file=.config/constraints.txt pyproject.toml --extra docs --extra test --strip-extras --unsafe-package ruamel-yaml-clib --upgrade
+      #   language: python
+      #   always_run: true
+      #   pass_filenames: false
+      #   files: ^.config\/.*(requirements|constraints).*$
+      #   alias: up
+      #   stages: [manual]
+      #   language_version: "3.10" # minimal we support officially
+      #   additional_dependencies:
+      #     - pip>=22.3.1
       - id: pip-compile
-        name: lock
-        alias: lock
-        always_run: true
-        entry: pip-compile --upgrade --resolver=backtracking -q --no-annotate --output-file=.config/lock-requirements.txt pyproject.toml --strip-extras --unsafe-package ruamel-yaml-clib
-        files: ^.config\/.*requirements.*$
-        language: python
-        language_version: "3.10" # minimal we support officially
-        pass_filenames: false
-        stages: [manual]
-        additional_dependencies:
-          - pip>=22.3.1
+        name: pip-compile requirements-docs.in
+        args:
+          [
+            .config/requirements.in,
+            --extra=docs,
+            --strip-extras,
+            --no-annotate,
+            --output-file=.config/requirements-docs.txt,
+            pyproject.toml,
+          ]
+        files: ^.config/requirements\.(in|txt)$
       - id: pip-compile
-        name: deps
-        alias: deps
-        always_run: true
-        entry: pip-compile --resolver=backtracking -q --no-annotate --output-file=.config/requirements.txt pyproject.toml --extra docs --extra test --strip-extras --unsafe-package ruamel-yaml-clib
-        files: ^.config\/.*(requirements|constraints).*$
-        language: python
-        language_version: "3.10" # minimal we support officially
-        pass_filenames: false
-        additional_dependencies:
-          - pip>=22.3.1
+        name: pip-compile requirements.in
+        args:
+          [
+            .config/requirements.in,
+            --strip-extras,
+            --no-annotate,
+            --output-file=.config/requirements.txt,
+            pyproject.toml,
+          ]
+        files: ^.config/requirements\.(in|txt)$
       - id: pip-compile
-        entry: pip-compile --resolver=backtracking -q --no-annotate --output-file=.config/constraints.txt pyproject.toml --extra docs --extra test --strip-extras --unsafe-package ruamel-yaml-clib --upgrade
-        language: python
-        always_run: true
-        pass_filenames: false
-        files: ^.config\/.*(requirements|constraints).*$
-        alias: up
-        stages: [manual]
-        language_version: "3.10" # minimal we support officially
-        additional_dependencies:
-          - pip>=22.3.1
+        name: pip-compile requirements-test.in
+        args:
+          [
+            .config/requirements.in,
+            -v,
+            --extra=test,
+            --strip-extras,
+            --no-annotate,
+            --output-file=.config/requirements-test.txt,
+            pyproject.toml,
+          ]
+        files: ^.config/requirements\.(in|txt)$
+      - id: pip-compile
+        name: pip-compile constraints.txt
+        args:
+          [
+            --all-build-deps,
+            --all-extras,
+            --strip-extras,
+            --no-annotate,
+            --output-file=.config/constraints.txt,
+            pyproject.toml,
+          ]
+        files: ^.config/requirements\.(in|txt)$

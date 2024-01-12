@@ -7,6 +7,3 @@ updates:
     open-pull-requests-limit: 10
     allow:
       - dependency-type: "direct"
-        update-type: "semver:minor"
-      - dependency-type: "direct"
-        update-type: "semver:major"

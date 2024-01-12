@@ -5,7 +5,7 @@
 #    pip-compile --extra=docs --no-annotate --output-file=.config/requirements-docs.txt --strip-extras .config/requirements.in pyproject.toml
 #
 ansible-compat==4.1.11
-ansible-core==2.16.2
+ansible-core==2.16.0
 attrs==23.2.0
 babel==2.14.0
 beautifulsoup4==4.12.2
@@ -31,7 +31,7 @@ jsmin==3.0.1
 jsonschema==4.20.0
 jsonschema-specifications==2023.12.1
 linkchecker==10.4.0
-markdown==3.5.2
+markdown==3.5.1
 markdown-exec==1.8.0
 markdown-include==0.8.1
 markupsafe==2.1.3

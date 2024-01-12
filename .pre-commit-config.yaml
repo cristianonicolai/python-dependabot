@@ -122,18 +122,18 @@ repos:
       #   language_version: "3.10" # minimal we support officially
       #   additional_dependencies:
       #     - pip>=22.3.1
-      - id: pip-compile
-        name: pip-compile requirements-docs.in
-        args:
-          [
-            .config/requirements.in,
-            --extra=docs,
-            --strip-extras,
-            --no-annotate,
-            --output-file=.config/requirements-docs.txt,
-            pyproject.toml,
-          ]
-        files: ^.config/requirements\.(in|txt)$
+      # - id: pip-compile
+      #   name: pip-compile requirements-docs.in
+      #   args:
+      #     [
+      #       .config/requirements.in,
+      #       --extra=docs,
+      #       --strip-extras,
+      #       --no-annotate,
+      #       --output-file=.config/requirements-docs.txt,
+      #       pyproject.toml,
+      #     ]
+      #   files: ^.config/requirements\.(in|txt)$
       - id: pip-compile
         name: pip-compile requirements.in
         args:
@@ -145,28 +145,28 @@ repos:
             pyproject.toml,
           ]
         files: ^.config/requirements\.(in|txt)$
-      - id: pip-compile
-        name: pip-compile requirements-test.in
-        args:
-          [
-            .config/requirements.in,
-            -v,
-            --extra=test,
-            --strip-extras,
-            --no-annotate,
-            --output-file=.config/requirements-test.txt,
-            pyproject.toml,
-          ]
-        files: ^.config/requirements\.(in|txt)$
-      - id: pip-compile
-        name: pip-compile constraints.txt
-        args:
-          [
-            --all-build-deps,
-            --all-extras,
-            --strip-extras,
-            --no-annotate,
-            --output-file=.config/constraints.txt,
-            pyproject.toml,
-          ]
-        files: ^.config/requirements\.(in|txt)$
+      # - id: pip-compile
+      #   name: pip-compile requirements-test.in
+      #   args:
+      #     [
+      #       .config/requirements.in,
+      #       -v,
+      #       --extra=test,
+      #       --strip-extras,
+      #       --no-annotate,
+      #       --output-file=.config/requirements-test.txt,
+      #       pyproject.toml,
+      #     ]
+      #   files: ^.config/requirements\.(in|txt)$
+      # - id: pip-compile
+      #   name: pip-compile constraints.txt
+      #   args:
+      #     [
+      #       --all-build-deps,
+      #       --all-extras,
+      #       --strip-extras,
+      #       --no-annotate,
+      #       --output-file=.config/constraints.txt,
+      #       pyproject.toml,
+      #     ]
+      #   files: ^.config/requirements\.(in|txt)$

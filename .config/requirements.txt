@@ -5,7 +5,7 @@
 #    pip-compile --no-annotate --output-file=.config/requirements.txt --strip-extras .config/requirements.in pyproject.toml
 #
 ansible-compat==4.1.11
-ansible-core==2.16.2
+ansible-core==2.16.3
 attrs==23.2.0
 cffi==1.16.0
 cryptography==41.0.7
